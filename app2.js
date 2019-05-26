@@ -2,13 +2,10 @@
 let z=document.getElementById("song-search");
 function searchsong(){
     document.getElementById("cards").innerHTML="";
-    document.getElementById("album_img").innerHTML="";
-    document.getElementById("soy").innerHTML=""
+
     let xhr= new XMLHttpRequest;
 //var x='Nirvana'
 let y=document.getElementById("song-input").value;
-if(y==="")
-    y=localStorage.getItem("album-name")
 console.log(y)
 xhr.addEventListener('load',function(){
     let o=(JSON.parse(this.responseText));
@@ -16,35 +13,11 @@ xhr.addEventListener('load',function(){
     console.log(o);   
 
     let songscard=document.getElementById("cards")
-    let album_img=document.getElementById("album_img")
     var j=0
     var row=document.createElement("div")
-    row.setAttribute("class","row")
-    let img=document.createElement("img");
-    img.src=o.img_url;
-    img.setAttribute("class","card-img-top")
-    let div2=document.createElement("div")
-    div2.setAttribute("class","card")
-    let div3=document.createElement("div")
-    div3.setAttribute("class","card")
-    let div4=document.createElement("div")
-    div4.setAttribute("class","card-body")
-    let p=document.createElement("p")
-    p.innerText=o.artist_name
-    let h3=document.createElement("h3");
-    h3.innerText=y.toUpperCase();
-    img.style="height:300px;width:200px;"
-    div4.appendChild(h3)
-    div4.appendChild(p)
-    div3.appendChild(img)
-    div3.appendChild(div4)
-    div2.appendChild(div3)
-    
-    album_img.appendChild(div2)
-    album_img.style="width:250px;"
-    let br=document.createElement("br")
-    songscard.appendChild(br)
-    for(i in o.data){
+   row.setAttribute("class","row")
+ 
+    for(i in o.name){
             // let li=document.createElement("li")
             // let a=o.name[i]
             // li.innerText=a
@@ -53,7 +26,7 @@ xhr.addEventListener('load',function(){
                 row.setAttribute("class","row")
                 j=0
             }
-            
+                    
             let div5=document.createElement("div")
             div5.setAttribute("class","column")
             let div7=document.createElement("div")
@@ -64,15 +37,16 @@ xhr.addEventListener('load',function(){
             let div8=document.createElement("div")
             div8.setAttribute("class","card-body")
             let p=document.createElement("p")
-            p.innerText=o.data[i].name
+            p.innerText=o.name[i]
             console.log(p)
             p.setAttribute("class","card-text")
             p.setAttribute("id",p.innerText)
             let ru='"'+p.innerText+'"'
-            p.setAttribute("onclick","callforyoutube("+ru+")");
+            p.setAttribute("onclick","callforalbum("+ru+")");
+            
+            
             
             div8.appendChild(p)
-
             div7.appendChild(div8)
             div5.appendChild(div7)
             //div.setAttribute("class","songdiv col-md-3 column")
@@ -91,24 +65,12 @@ xhr.addEventListener('load',function(){
             //callforyoutube(ps)
         }
 })
-
-xhr.open('GET','http://192.168.43.206:5000/'+y)
+xhr.open('GET','http://192.168.43.206:5000/album/'+y)
 xhr.send();
 };
-
-function callforyoutube(ps){
-    var xhttp = new XMLHttpRequest;
-    xhttp.addEventListener('load',function(){
-       let soy=(JSON.parse(this.responseText));
-       soy.search=soy.search.replace("watch?v=","embed/")
-        console.log(ps)
-       document.getElementById("soy").innerHTML='<object width="480" height="385"><param name="movie" value='+soy.search+'></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><iframe src='+soy.search+' type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="false" width="480" height="385"></iframe></object>'
+function callforalbum(ru){
+    localStorage.setItem('album-name',ru)
+    window.location.href="search.html"
 
 
-       
-
-    })
-    xhttp.open('GET','http://192.168.43.206:5000/search/'+ps)
-    xhttp.send()
-   
 }
