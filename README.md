@@ -21,10 +21,13 @@ APIs are made in the backend with PUT method in JSON format which is called fron
 ## Platform and Modules used
 Backend: Flask (Python Web Framework) <br />
 Frontend: Javascript, HTML, CSS, AJAX, Bootstrap <br />
-Modules: BeautifulSoup, CORS, urllib.request,spotipy,request,jsonify <br />
+Modules: BeautifulSoup, CORS, urllib.request, spotipy, request, jsonify. <br />
 
 ## Usage
 
 ```console
 music@islove:~$ pip3 install -r requirements.txt 
+music@islove:~$ export FLASK_APP=app11.py
+music@islove:~$ export FLASK_DEBUG=1
+music@islove:~$ flask run
 ```
