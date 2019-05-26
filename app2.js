@@ -65,7 +65,7 @@ xhr.addEventListener('load',function(){
             //callforyoutube(ps)
         }
 })
-xhr.open('GET','http://127.0.0.1:5000/album/'+y)
+xhr.open('GET','http://13.59.198.230:5000/album/'+y)
 xhr.send();
 };
 function callforalbum(ru){
