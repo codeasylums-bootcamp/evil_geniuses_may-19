@@ -92,7 +92,7 @@ xhr.addEventListener('load',function(){
         }
 })
 
-xhr.open('GET','http://192.168.43.206:5000/'+y)
+xhr.open('GET','http://127.0.0.1:5000/'+y)
 xhr.send();
 };
 
