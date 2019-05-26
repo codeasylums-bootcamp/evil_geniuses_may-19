@@ -1,0 +1,6 @@
+Flask == 1.0.3
+BeautifulSoup == 3.2.1
+spotipy == 2.4.4
+Flask-Cors == 3.0.7
+requests 
+wikipedia == 1.4.0
